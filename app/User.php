@@ -23,4 +23,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    /**
+     * Returns subjects as an array
+     */
+    public function subjects()
+    {
+        return explode(", ", $this->subjects);
+        // explode maybe 'subjects'
+    }
 }

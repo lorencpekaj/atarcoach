@@ -11,6 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::auth();
+
+Route::group(['middleware' => 'auth'], function () {
+
+	Route::get('/', 'HomeController@index');
+
+	Route::get('/subject/select', 'UserSubjectController@index')->name('usersubject.index');
+	Route::post('/subject/select', 'UserSubjectController@store')->name('usersubject.store');
+
+});
+
+Route::group(['prefix' => 'api', 'middleware' => 'api'], function () {
+    Route::group(['middleware' => 'api:auth'], function () {
+
+		Route::get('/subjects', 'SubjectController@index'); // unused
+
+    });
 });
