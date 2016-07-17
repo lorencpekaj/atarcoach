@@ -1,19 +1,26 @@
 <!DOCTYPE html>
-<html class="bootstrap-layout">
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{{ $title or "AtarCoach" }}</title>
 
-    <!-- header -->
-    @include ('partials/header')
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <!-- header skriptz -->
-    @yield ('header_scripts')
+  <!-- Title of ATARCoach -->
+  <title>{{ $title or "Atarcoach" }}</title>
+
+  <!-- header -->
+  @include ('partials/header')
+
+  <!-- header skriptz -->
+  @yield ('header_scripts')
 
 </head>
-<body class="login">
+
+<body>
+
     <!-- content -->
     @yield ('content')
 
@@ -22,5 +29,7 @@
 
     <!-- scripts -->
     @yield ('scripts')
+
 </body>
+
 </html>

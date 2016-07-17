@@ -16,8 +16,9 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('forceSubject', ['except' => 'selectSubjects']);
+        $this->middleware('forceSubject', ['except' => ['selectSubjects', 'index']]);
     }
+
 
     /**
      * Show the application dashboard.
@@ -25,6 +26,16 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {
+        return view('welcome');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function dashboard()
     {
         $user = \Auth::user();
 

@@ -4,11 +4,7 @@
 
 <div class="row">
     <div class="col-sm-8 col-sm-push-1 col-md-4 col-md-push-3 col-lg-4 col-lg-push-4">
-      <div class="center m-a-2">
-        <div class="icon-block img-circle">
-          <i class="material-icons md-36 text-muted">edit</i>
-        </div>
-      </div>
+
       <div class="card">
         <div class="card-header bg-white center">
           <h4 class="card-title">Sign Up</h4>

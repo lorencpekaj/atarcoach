@@ -20,7 +20,7 @@
 
     <!-- sidebur -->
     @include ('partials/sidebar')
-    
+
     <!-- content -->
     <div class="layout-content" data-scrollable>
         <div class="container-fluid">
