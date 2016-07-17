@@ -13,9 +13,11 @@
 
 Route::auth();
 
+Route::get('/', 'HomeController@index');
+
 Route::group(['middleware' => 'auth'], function () {
 
-	Route::get('/', 'HomeController@index');
+	Route::get('/dashboard', 'HomeController@index');
 
 	Route::get('/subject/select', 'UserSubjectController@index')->name('usersubject.index');
 	Route::post('/subject/select', 'UserSubjectController@store')->name('usersubject.store');
