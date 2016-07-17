@@ -27,7 +27,6 @@
 
 @section ('scripts')
 <script src="https://cdn.jsdelivr.net/bootstrap.listgroup/1.1.2/listgroup.min.js"></script>
-<script src="{{ asset('js/sweetalert-dev.js') }}"></script>
 
 <script type="text/javascript">
 	var apiUrlPrefix = '/atarcoach/public/';
