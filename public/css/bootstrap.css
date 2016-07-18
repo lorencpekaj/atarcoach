@@ -6035,6 +6035,9 @@ footer {
   padding-top: 11px;
   padding-bottom: 11px; }
 
+.btn-fixed {
+  position: fixed; }
+
 .btn-atar {
   color: #fff;
   background-color: #5faee3;
@@ -6268,9 +6271,22 @@ footer {
   display: inline-block !important; }
 
 .container-auth {
-  margin-top: 100px; }
+  margin-top: 100px;
+  margin-bottom: 100px; }
   .container-auth .ac-icon {
     padding: 0; }
   .container-auth h4 {
     color: white;
     padding-bottom: 20px; }
+  .container-auth .select-subject .list-group .active {
+    background-color: #5faee3;
+    border-color: #5faee3; }
+  .container-auth .select-subject .list-group .active:hover {
+    background-color: #4aa3df;
+    border-color: #4aa3df; }
+  .container-auth .select-subject .list-group-item:first-child {
+    border-top-right-radius: 0px !important;
+    border-top-left-radius: 0px !important; }
+  .container-auth .select-subject .list-group-item:last-child {
+    border-bottom-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important; }

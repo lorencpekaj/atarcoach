@@ -3,32 +3,35 @@
 @section ('content')
 
     <div class="container container-auth">
-        
+
         <div class="row">
             <div class="col-xs-12 text-center">
                 <div class="ac-icon atar-logo"></div>
                 <h4>Select your VCE subjects</h4>
             </div>
         </div>
-        
-        <div class="row">
-            <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
-		                
-		    	{!! Form::open(['url' => '/subject/select', 'method' => 'POST']) !!}
+
+        <div class="row select-subject buffer-top">
+		    {!! Form::open(['url' => '/subject/select', 'method' => 'POST']) !!}
+	            <div class="col-md-offset-3 col-md-4 col-sm-offset-2 col-sm-6 col-xs-12">
+
 			        <div class="form-group">
 			        	{!! Form::select('subjects[]', $subjects->lists('subject', 'id'), 0, ['class' => 'list-group', 'multiple']) !!}
 			        </div>
-		
+
 			        <div class="form-group">
-			        	{!! Form::submit('Select subjects', ['class' => 'btn btn-primary btn-md pull-right']) !!}
+			        	{!! Form::submit('Continue...', ['class' => 'btn btn-atar btn-block']) !!}
 			        </div>
-		    	{!! Form::close() !!}
-                
-            </div>
+
+	            </div>
+	            <div class="col-sm-2 hidden-xs">
+			        {!! Form::submit('Continue...', ['class' => 'btn btn-success btn-fixed hidden-xs']) !!}
+	            </div>
+		    {!! Form::close() !!}
         </div>
-        
+
     </div>
-    
+
 @endsection
 
 @section ('scripts')
