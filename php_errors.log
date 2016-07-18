@@ -1,0 +1,8 @@
+[18-Jul-2016 01:22:56 UTC] PHP Warning:  require(/home/ubuntu/workspace/atarcoach/bootstrap/../vendor/autoload.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/atarcoach/bootstrap/autoload.php on line 17
+[18-Jul-2016 01:22:56 UTC] PHP Stack trace:
+[18-Jul-2016 01:22:56 UTC] PHP   1. {main}() /home/ubuntu/workspace/atarcoach/public/index.php:0
+[18-Jul-2016 01:22:56 UTC] PHP   2. require() /home/ubuntu/workspace/atarcoach/public/index.php:22
+[18-Jul-2016 01:22:56 UTC] PHP Fatal error:  require(): Failed opening required '/home/ubuntu/workspace/atarcoach/bootstrap/../vendor/autoload.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/atarcoach/bootstrap/autoload.php on line 17
+[18-Jul-2016 01:22:56 UTC] PHP Stack trace:
+[18-Jul-2016 01:22:56 UTC] PHP   1. {main}() /home/ubuntu/workspace/atarcoach/public/index.php:0
+[18-Jul-2016 01:22:56 UTC] PHP   2. require() /home/ubuntu/workspace/atarcoach/public/index.php:22

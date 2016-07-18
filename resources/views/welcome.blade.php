@@ -35,13 +35,7 @@
           <h1>Breeze through your exams</h1>
           <h2>ATARCoach prepares you for your final exams in the best way possible</h2>
 
-          {!! Form::open(['url' => 'register', 'method' => 'GET', 'class' => 'form-inline']) !!}
-            <div class="form-group">
-              {!! Form::email('email', '', ['class' => 'form-control input-lg', 'placeholder' => 'Email Address']) !!}
-            </div>
-            {!! Form::submit('Sign up', ['class' => 'btn btn-lg btn-atar hidden-xs']) !!}
-            {!! Form::submit('Sign up', ['class' => 'btn btn-lg btn-block btn-atar visible-xs']) !!}
-          {!! Form::close() !!}
+          <a href="/register" class="btn btn-lg btn-atar">Get started</a>
         </div>
       </div>
 

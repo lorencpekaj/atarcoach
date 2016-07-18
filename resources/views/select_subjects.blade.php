@@ -1,28 +1,34 @@
-@extends ('layouts.app')
+@extends ('layouts.auth')
 
 @section ('content')
 
-<div class="row">
-    <div class="col-md-12" id="subject-selection">
-
-    	{!! Form::open(['url' => '/subject/select', 'method' => 'POST']) !!}
-	        <div class="form-group">
-	       		<h2>Select your VCE subjects</h2>
-	        </div>
-
-	        <div class="form-group">
-	        	{!! Form::select('subjects[]', $subjects->lists('subject', 'id'), 0, ['class' => 'list-group', 'multiple']) !!}
-	        </div>
-
-	        <div class="form-group">
-	        	{!! Form::submit('Select subjects', ['class' => 'btn btn-primary btn-md pull-right']) !!}
-	        </div>
-    	{!! Form::close() !!}
-
-
+    <div class="container container-auth">
+        
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <div class="ac-icon atar-logo"></div>
+                <h4>Select your VCE subjects</h4>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
+		                
+		    	{!! Form::open(['url' => '/subject/select', 'method' => 'POST']) !!}
+			        <div class="form-group">
+			        	{!! Form::select('subjects[]', $subjects->lists('subject', 'id'), 0, ['class' => 'list-group', 'multiple']) !!}
+			        </div>
+		
+			        <div class="form-group">
+			        	{!! Form::submit('Select subjects', ['class' => 'btn btn-primary btn-md pull-right']) !!}
+			        </div>
+		    	{!! Form::close() !!}
+                
+            </div>
+        </div>
+        
     </div>
-</div>
-
+    
 @endsection
 
 @section ('scripts')
