@@ -1,37 +1,36 @@
 <!DOCTYPE html>
-<html class="bootstrap-layout">
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{{ $title or "AtarCoach" }}</title>
 
-    <!-- header -->
-    @include ('partials/header')
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <!-- header skriptz -->
-    @yield ('header_scripts')
+  <!-- Title of ATARCoach -->
+  <title>{{ $title or "Atarcoach" }}</title>
+
+  <!-- header -->
+  @include ('partials/header')
+
+  <!-- header skriptz -->
+  @yield ('header_scripts')
 
 </head>
-<body class="layout-container ls-top-navbar si-l3-md-up">
 
-    <!-- nav -->
-    @include ('partials/nav')
+<body>
 
-    <!-- sidebur -->
-    @include ('partials/sidebar')
-
+    <div style="width:100%;background:red;text-align:center;font-weight:600;font-size:16px">update app.blade.php</div>
     <!-- content -->
-    <div class="layout-content" data-scrollable>
-        <div class="container-fluid">
-            @yield ('content')
-        </div>
-    </div>
+    @yield ('content')
 
     <!-- footer -->
     @include ('partials/footer')
 
     <!-- scripts -->
     @yield ('scripts')
+
 </body>
+
 </html>
