@@ -27,15 +27,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (\Auth::guest()) {
-            return view('welcome');
-        }
-
+        return view('welcome');
+    }
+    
+    /**
+     * Show the application dashboard if authenticated.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function dashboard()
+    {
         $user = \Auth::user();
 
         $userSubjects = Subject::all();
 
-        return view('home')->with('user', $user)
+        return view('dashboard')->with('user', $user)
                            ->with('userSubjects', $userSubjects);
     }
 }

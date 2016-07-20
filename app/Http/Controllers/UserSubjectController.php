@@ -11,6 +11,11 @@ use App\Subject;
 
 class UserSubjectController extends Controller
 {
+    // Changing the maximum subjects may require a database column character limit change as well
+    static $subjectStoreRules = [
+        'subjects' => 'required|array|min:3|max:6',
+    ];
+    
     /**
      * Show the subject selection
      *
@@ -32,9 +37,7 @@ class UserSubjectController extends Controller
 	 */
     public function store(Request $request)
    	{
-        $validator = Validator::make($request->all(), [
-            'subjects' => 'required|array|min:4|max:6',
-        ]);
+        $validator = Validator::make($request->all(), static::$subjectStoreRules);
 
         $validator->each('subjects', 'required|exists:subjects,id');
 
