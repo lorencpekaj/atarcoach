@@ -39,9 +39,12 @@ class HomeController extends Controller
     {
         $user = \Auth::user();
 
-        $userSubjects = Subject::all();
+        $userSubjects = Subject::whereIn('id', $user->subjects())->get();
+        
+        $showSubject = $userSubjects[0];
 
         return view('dashboard')->with('user', $user)
-                           ->with('userSubjects', $userSubjects);
+                                ->with('userSubjects', $userSubjects)
+                                ->with('showSubject', $showSubject);
     }
 }

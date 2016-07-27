@@ -19,7 +19,7 @@
 
 </head>
 
-<body>
+<body class="app">
 
     <div style="width:100%;background:red;text-align:center;font-weight:600;font-size:16px">update app.blade.php</div>
     <!-- content -->
