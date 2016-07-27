@@ -5,11 +5,11 @@
     <nav id="navbar">
       <ul class="container">
         <li class="nav-item brand"><div class="atar-logo"></div></li>
-        <!--<li class="nav-item">PRICING</li>-->
-        <!--<li class="nav-item">LEARN</li>-->
+        
+        <!-- TODO: fix navbar -->
 
-        <li class="nav-item">CONTINUE LEARNING</li>
-        <li class="nav-item">SIGN UP</li>
+        <li class="nav-item"><a href="/login">CONTINUE LEARNING</a></li>
+        <li class="nav-item"><a href="/register">SIGN UP</a></li>
 
         <li class="mob-nav-item"><a href="#"><i class="ico glyphicon glyphicon-menu-hamburger"></i></a></li>
 

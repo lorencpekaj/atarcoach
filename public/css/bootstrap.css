@@ -5824,6 +5824,12 @@ button.close {
 .buffer-top {
   margin-top: 20px; }
 
+.nm-bottom {
+  margin-bottom: 0; }
+
+.nm-top {
+  margin-top: 0; }
+
 html * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
@@ -5847,7 +5853,7 @@ body {
   font-family: Libre Franklin;
   font-size: 13px;
   color: #333;
-  background: #337ab7;
+  background: #eee;
   transition: 0.3s ease; }
 
 header nav {
@@ -6270,6 +6276,9 @@ footer {
 .show-mob {
   display: inline-block !important; }
 
+.body-auth {
+  background: #337ab7; }
+
 .container-auth {
   margin-top: 100px;
   margin-bottom: 100px; }
@@ -6290,3 +6299,25 @@ footer {
   .container-auth .select-subject .list-group-item:last-child {
     border-bottom-right-radius: 0px !important;
     border-bottom-left-radius: 0px !important; }
+
+.app {
+  background: white; }
+  .app nav {
+    padding-top: 20px;
+    padding-bottom: 50px;
+    background: #337ab7; }
+    .app nav h2 {
+      color: white; }
+      .app nav h2 small {
+        color: white; }
+  .app .content {
+    line-height: 30px; }
+    .app .content h3, .app .content h4 {
+      margin-bottom: 0; }
+    .app .content .complete-progress {
+      font-weight: 600; }
+    .app .content .continue-exam {
+      margin: 0; }
+    .app .content .cancel-exam {
+      margin: 0;
+      padding: 0; }
