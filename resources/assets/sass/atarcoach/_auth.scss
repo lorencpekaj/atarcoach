@@ -1,0 +1,45 @@
+// Body
+.body-auth {
+  background: $brand-primary;
+}
+
+// Container
+.container-auth {
+    
+    margin-top: 100px;
+    margin-bottom: 100px;
+    
+    .ac-icon {
+        padding: 0; //0 0 50px 0;
+    }
+    
+    h4 {
+        color: white;
+        padding-bottom: 20px;
+    }
+    
+    .select-subject {
+      // Format list group
+      .list-group .active {
+        background-color: lighten(#3498db, 10%);
+        border-color: lighten(#3498db, 10%);
+      }
+      
+      .list-group .active:hover {
+        background-color: lighten(#3498db, 5%);
+        border-color: lighten(#3498db, 5%);
+      }
+      
+      .list-group-item:first-child {
+        border-top-right-radius: 0px !important;
+        border-top-left-radius: 0px !important;
+      }
+      
+      .list-group-item:last-child {
+        border-bottom-right-radius: 0px !important;
+        border-bottom-left-radius: 0px !important;
+      }
+    }
+    
+    
+}

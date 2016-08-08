@@ -1,0 +1,49 @@
+.app {
+    background: white;
+    
+    nav {
+        
+        padding-top: 20px;
+        padding-bottom: 50px;
+        background: $brand-primary;
+        
+        h2 {
+            color: white;
+            
+            small {
+                color: white;
+            }
+        }
+        
+    }
+    
+    .nav-admin {
+        background-color: $brand-danger !important;
+    }
+
+    .content {
+        
+        h3, h4 {
+            margin-bottom: 0;
+        }
+        
+        .complete-progress {
+            font-weight: 600;
+        }
+        
+        .continue-exam {
+            margin: 0;    
+        }
+        
+        .cancel-exam {
+            margin: 0;
+            padding: 0;
+        }
+        
+        
+        line-height: 30px;
+    }
+    
+    
+    
+}
