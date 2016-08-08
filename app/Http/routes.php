@@ -30,6 +30,13 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
+// Admin
+Route::group(['prefix' => 'admin', 'middleware' => 'api'], function () { // TODO: middleware admin
+    
+    Route::get('/', 'AdminController@index');
+    
+});
+
 // API
 Route::group(['prefix' => 'api', 'middleware' => 'api'], function () {
     Route::group(['middleware' => 'api:auth'], function () {

@@ -6207,6 +6207,8 @@ footer {
       color: white; }
       .app nav h2 small {
         color: white; }
+  .app .nav-admin {
+    background-color: #d9534f !important; }
   .app .content {
     line-height: 30px; }
     .app .content h3, .app .content h4 {
