@@ -19,7 +19,7 @@
 
 </head>
 
-<body>
+<body class="body-auth">
 
     <!-- content -->
     @yield ('content')

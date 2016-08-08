@@ -20,10 +20,24 @@
 </head>
 
 <body class="app">
-
-    <div style="width:100%;background:red;text-align:center;font-weight:600;font-size:16px">update app.blade.php</div>
+  
+    <!-- navigation -->
+    @include ('partials/app/nav')
+  
     <!-- content -->
-    @yield ('content')
+    <div class="container buffer-top">
+      
+      <div class="row">
+        <div class="col-md-9">
+          @yield ('content')
+        </div>
+        
+        <div class="col-sm-3">
+          @include ('partials/app/sidebar')
+        </div>
+      </div>
+      
+    </div>
 
     <!-- footer -->
     @include ('partials/footer')

@@ -17,6 +17,9 @@ Route::auth();
 // Creates the index route (GET)
 Route::get('/', 'HomeController@index')->middleware('guest');
 
+// ExamController
+Route::resource('exam', 'ExamController');
+
 // Authenticated user routes
 Route::group(['middleware' => 'auth'], function () {
 
