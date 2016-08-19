@@ -42,8 +42,10 @@ class HomeController extends Controller
         $userSubjects = Subject::whereIn('id', $user->subjects())->get();
         
         $showSubject = $userSubjects[0];
-
-        return view('dashboard')->with('user', $user)
+          
+        return view('dashboard')->with('appHeading', "Welcome back, {$user->name}")
+                                ->with('appSubheading', "You haven't practised yet")
+                                ->with('user', $user)
                                 ->with('userSubjects', $userSubjects)
                                 ->with('showSubject', $showSubject);
     }
