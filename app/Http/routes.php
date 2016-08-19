@@ -17,7 +17,7 @@ Route::auth();
 // Creates the index route (GET)
 Route::get('/', 'HomeController@index')->middleware('guest');
 
-// ExamController
+// Create controller for exams
 Route::resource('exam', 'ExamController');
 
 // Authenticated user routes
@@ -31,9 +31,17 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 // Admin
-Route::group(['prefix' => 'admin', 'middleware' => 'api'], function () { // TODO: middleware admin
+Route::group(['prefix' => 'admin'], function () { // TODO: middleware admin
     
-    Route::get('/', 'AdminController@index');
+    // Create controller for admin index
+    Route::get('/', 'Admin\AdminController@index')->name('admin.index');
+    
+    // Create controller for chapters
+    Route::resource('chapter', 'Admin\ChapterController');
+    
+    // Create controller for questions
+    Route::resource('question', 'Admin\QuestionController');
+    
     
 });
 
@@ -42,6 +50,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'api'], function () {
     Route::group(['middleware' => 'api:auth'], function () {
 
 		Route::get('/subjects', 'SubjectController@index'); // unused
+		Route::get('/chapters/{id}', 'Api\ApiChapterController@show'); // unused
 
     });
 });

@@ -36,7 +36,10 @@
       
       <div class="row">
         <div class="col-md-12 text-center">
-          <h2><strong>Admin Panel</strong></h2>
+          <h2><strong><a href="{{ route('admin.index') }}">Admin Panel</a></strong></h2>
+          @if (isset($appSubheading))
+            <h2><small>{{ $appSubheading }}</small></h2>
+          @endif
         </div>
       </div>
       
@@ -48,12 +51,8 @@
     <div class="container buffer-top">
       
       <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
           @yield ('content')
-        </div>
-        
-        <div class="col-sm-3">
-          @include ('partials/app/sidebar')
         </div>
       </div>
       
