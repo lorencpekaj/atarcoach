@@ -25,8 +25,8 @@ class QuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('question_set_id')->unsigned()->nullable();
-            $table->text('questions');
-            $table->morphs('type');
+            $table->tinyInteger('type')->unsigned();
+            $table->text('information');
             $table->timestamps();
         });
     }

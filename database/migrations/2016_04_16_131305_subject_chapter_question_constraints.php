@@ -14,7 +14,7 @@ class SubjectChapterQuestionConstraints extends Migration
     {
         // Delete if chapter deleted
         Schema::table('chapters', function (Blueprint $table) {
-            $table->foreign('subject_id')->references('id')->on('chapters')->onDelete('cascade');
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
         });
 
         // Delete if chapter deleted
