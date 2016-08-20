@@ -40,12 +40,25 @@
         <div class="form-group">
           {!! Form::label('information', 'Question', ['class' => 'col-xs-3 control-label', 'id' => 'chapter']) !!}
           <div class="col-xs-9">
-            {!! Form::textarea('information', null, ['placeholder' => 'Write your question here']) !!}
+            {!! Form::textarea('information', null, ['placeholder' => 'Write your question here', 'style' => 'height: 300px']) !!}
           </div>
         </div>
         
         <hr>
         
+        <div class="form-group">
+          {!! Form::label('choice', 'Multiple choices', ['class' => 'col-xs-3 control-label', 'id' => 'chapter']) !!}
+          <div class="col-xs-9">
+            @for ($i = 1; $i != 5; $i++)
+              <div style="padding-bottom: 10px">
+                {!! Form::text('choice[]', null, ['class' => 'form-control', 'placeholder' => "Choice {$i}"]) !!}
+              </div>
+            @endfor
+            <p class="text-muted">The first choice will be the solution.</p>
+          </div>
+        </div>
+        
+        <hr>
         
         <!-- Question set -->
         <div class="form-group">
@@ -54,7 +67,6 @@
             {!! Form::text('question_set', null, ['class' => 'form-control', 'placeholder' => 'Ignore if this question is unique', 'id' => 'question_set']) !!}
           </div>
         </div>
-        
         
         <!-- Submit -->
         <div class="row">
@@ -72,8 +84,6 @@
 @endsection
 
 @section ('scripts')
-<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-<script src="https://cdn.jsdelivr.net/vue.resource/0.9.3/vue-resource.min.js"></script>
 <script type="text/javascript">
 new Vue({
   

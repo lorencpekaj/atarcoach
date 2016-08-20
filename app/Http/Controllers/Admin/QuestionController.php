@@ -18,13 +18,16 @@ use App\Question;
 
 use App\QuestionSet;
 
+use App\QuestionChoice;
+
 class QuestionController extends Controller
 {
     static $questionStoreRules = [
-        //{"_token":"yAJ4KPsYqNIztI2EShn6DdHCLUe9mv63B8dQ0LLU","subjectId":"1","chapter":"Balance Sheets","information":"\tMaxing\r\n\t** asd **","question_set":"1"}
         "subject_id"    => "required|integer|exists:subjects,id",
         "chapter_id"    => "required|integer|exists:chapters,id",
         "information"   => "required",
+        "choice"        => "required|array|min:4|max:4", // Ensure max and min of 4 choices
+        "choice.*"      => "required", // Need something in all choices
         "question_set"  => "integer|min:0|exists:questions_sets,id"
     ];
         
@@ -35,7 +38,10 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        $subjects = Subject::lists('subject', 'id');
+
+        return view('admin.question.index')->with('appSubheading', 'Access chapters among subjects')
+                                          ->with('subjects', $subjects);
     }
 
     /**
@@ -90,7 +96,15 @@ class QuestionController extends Controller
             $question->question_set_id = $questionSet->id;
             
             $question->save();
+            
+            // Insert all question choices into the database
+            foreach ($request->choice as $id => $choice) {
+                $questionChoice[] = ["question_id" => $question->id, "choice" => e($choice), "is_correct" => ($id == 0)];
+            }
+            
+            QuestionChoice::insert($questionChoice);
 
+            // Redirect user back with success!
  			Alert::success("You have created a new question!", "Question created");
             return redirect()->back();
         }
