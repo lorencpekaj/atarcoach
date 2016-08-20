@@ -1,0 +1,11 @@
+* create multiple choice answers per question
+* create exam feature
+    - resume exam
+    - exit exam
+    - maybe ajax based.
+* progress through exams
+* edit question/chapters
+
+-- to learn
+- vuejs props
+- model
