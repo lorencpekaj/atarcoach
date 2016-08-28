@@ -17,6 +17,14 @@
         
     }
     
+    .app-heading a {
+        color: white;
+        &:hover {
+            color: #fefefe;
+        }
+        
+    }
+    
     .nav-admin {
         background-color: $brand-danger !important;
     }

@@ -9,6 +9,11 @@
     margin-top: 100px;
     margin-bottom: 100px;
     
+    .form-label a {
+      color: #333;
+      &:hover { color: #444; }
+    }
+    
     .ac-icon {
         padding: 0; //0 0 50px 0;
     }

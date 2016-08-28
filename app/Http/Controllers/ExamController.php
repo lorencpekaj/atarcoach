@@ -16,6 +16,8 @@ use App\Exam;
 
 use App\QuestionSet;
 
+use App\QuestionChoice;
+
 class ExamController extends Controller
 {
     static $examStoreRules = [
@@ -68,7 +70,7 @@ class ExamController extends Controller
         if ($validator->fails()) {
  			Alert::error("Error", "Couldn't create exam")->persistent('Close');
  			return var_dump($validator->errors());
-            // return redirect()->route('admin.chapter.create')->withErrors($validator)->withInput();
+            return redirect()->route('admin.chapter.create')->withErrors($validator)->withInput();
         }
         
         $exam = new Exam;
@@ -76,14 +78,17 @@ class ExamController extends Controller
         $exam->user_id = \Auth::user()->id;
         $exam->title = e($request->title);
         
-        // Fetch all questions where chapter id = ...
-        
         //I want to select all QuestionSet until SUM(QuestionSet->Questions) < 10
         $questionSets = QuestionSet::whereChapterId($request->chapter_id)
         
                                     ->withCount('questions')
                                     
                                     ->get();
+                                    
+        if ($questionSets->isEmpty()) {
+ 			Alert::error("Please try again later.", "No available questions!")->persistent('Close');
+            return redirect()->route('exam.create')->withInput();
+        }
         
         // Randomize question sets
         $questionSets = $questionSets->shuffle();
@@ -126,11 +131,146 @@ class ExamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($exam)
     {
-        //
+        $user = \Auth::user();
+
+        $exam = Exam::findOrFail($exam);
+        
+        // Question sets
+        $questions = array_values(array_diff($exam->questionSetsArray(), $exam->completedQuestionSetsArray()));
+        
+        if (empty($questions)) {
+            return redirect()->route('exam.results', $exam->id);
+        }
+        
+        // Check if there are any question sets in the exam
+        return redirect()->route('exam.question.show', [$exam->id, $questions[0]]);
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showQuestion($exam, $question) {
+        $user = \Auth::user();
+
+        $exam = Exam::findOrFail($exam);
+
+        $questionSet = QuestionSet::findOrFail($question);
+        
+        $questionsComplete = number_format($exam->totalQuestions(true) / $exam->totalQuestions() * 100, 0);
+
+        return view('exam.show')->with('appHeading', $exam->title)
+                                ->with('appSubheading', "{$questionsComplete}% Complete")
+                                
+                                ->with('exam', $exam)
+                                ->with('questionSet', $questionSet)
+                                ->with('questions', $questionSet->questions)
+                                    
+                                ->with('user', $user);
+    }
+    
+    public function completed($exam) {
+        $user = \Auth::user();
+
+        $exam = Exam::findOrFail($exam);
+
+        $questionSet = QuestionSet::findOrFail($question);
+
+        return view('exam.show')->with('appHeading', $exam->title)
+                                ->with('appSubheading', 'Questions')
+                                
+                                ->with('exam', $exam)
+                                ->with('questionSet', $questionSet)
+                                ->with('questions', $questionSet->questions);
+                                    
+    }
+    
+    public function results($exam) {
+        
+        $exam = Exam::findOrFail($exam);
+        
+        // Get exam questions
+        $questions = array_values(array_diff($exam->questionSetsArray(), $exam->completedQuestionSetsArray()));
+        
+        // Get user choices
+        $completedQuestionChoices = array_values(json_decode($exam->question_sets_completed, true));
+        
+        if ($completedQuestionChoices == null) {
+            \App::abort(404);
+        }
+        
+        $questionChoicesArray = call_user_func_array('array_merge', $completedQuestionChoices);
+        
+        $questionChoices = QuestionChoice::whereIn('id', $questionChoicesArray)
+                                         ->with(['question' => function ($foo) {
+                                             $foo->with(['choices' => function ($bar) {
+                                                 $bar->where('is_correct', true);
+                                             }]);
+                                         }])
+                                         ->get();
+        
+        // Count correct questions
+        $questionsCount = $questionChoices->count();
+        $correctQuestionsCount = 0;
+        
+        foreach ($questionChoices as $choice) {
+            if ($choice->id == $choice->question->choices[0]->id) {
+                $correctQuestionsCount ++;
+            }
+        }
+                                         
+        return view('exam.results')->with('appHeading', $exam->title)
+                                   ->with('appSubheading', 'Exam Summary')
+                                   ->with('percentageScore', number_format($correctQuestionsCount / $questionsCount * 100, 1))
+                                   ->with(compact('questionChoices', 'correctChoices'));
+    }
+    
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function progressQuestion(Request $request, $exam, $question) {
+        $user = \Auth::user();
+
+        $exam = Exam::findOrFail($exam);
+
+        $questionSet = QuestionSet::findOrFail($question);
+        
+        // Get selected values
+        $selectedChoices = $request->choice;
+        
+        $questionChoices = QuestionChoice::whereIn('id', $selectedChoices)->get();
+        
+        if (is_null($questionChoices)) {
+            return "No question choices found!";
+        }
+        
+        // TODO: validate if question choice is valid question set
+        
+        // TODO: validate question choice
+        
+        // Create an empty question set array to store the choices
+        $completedQuestionSet = json_decode($exam->question_sets_completed, true);
+        
+        // Save the choices to the empty question set array
+        foreach ($questionChoices as $choice) {
+            $completedQuestionSet[$questionSet->id][] = $choice->id;
+        }
+        
+        // Save the choices to the database
+        $exam->question_sets_completed = json_encode($completedQuestionSet);
+        $exam->save();
+        
+        // Redirect to exam index, it will skip to next question.
+        return redirect()->route('exam.show', $exam->id);
+    }
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -162,6 +302,18 @@ class ExamController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = \Auth::user();
+
+        $exam = Exam::findOrFail($id);
+        
+        // Check if the exam is the user's
+        if ($exam->user_id != $user->id) {
+            return \App::abort(403);
+        }
+        
+        $exam->delete();
+        
+ 		Alert::success("You have deleted an exam!", "Exam destroyed");
+        return redirect('/');
     }
 }

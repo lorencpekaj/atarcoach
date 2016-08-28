@@ -48,21 +48,6 @@
           </div>
         </div>
         
-        <!-- Options -->
-        <div class="form-group">
-          {!! Form::label('questions', 'Options', ['class' => 'col-sm-3 control-label']) !!}
-          <div class="col-sm-9">
-            
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="">
-                Ignore questions you have already done
-              </label>
-            </div>
-            
-          </div>
-        </div>
-        
         <!-- Submit -->
         <div class="row">
           <div class="col-sm-offset-9 col-sm-3">

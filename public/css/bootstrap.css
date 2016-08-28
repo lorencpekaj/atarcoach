@@ -5778,8 +5778,12 @@ body {
 header nav {
   padding: 45px 0;
   font-size: 13px;
-  letter-spacing: 2px;
-  color: white; }
+  letter-spacing: 2px; }
+  header nav a {
+    color: white; }
+    header nav a:hover {
+      color: #eee;
+      text-decoration: none; }
   header nav .nav-item {
     list-style: none;
     display: inline-block;
@@ -5797,12 +5801,6 @@ header nav {
   header nav .brand {
     font-size: 32px;
     letter-spacing: 2px; }
-  header nav .nav-btn {
-    padding: 10px 20px;
-    background: #3d9ced;
-    color: white;
-    border-radius: 2px;
-    border-bottom: none !important; }
 
 .landing {
   z-index: -5;
@@ -6179,6 +6177,10 @@ footer {
 .container-auth {
   margin-top: 100px;
   margin-bottom: 100px; }
+  .container-auth .form-label a {
+    color: #333; }
+    .container-auth .form-label a:hover {
+      color: #444; }
   .container-auth .ac-icon {
     padding: 0; }
   .container-auth h4 {
@@ -6207,6 +6209,10 @@ footer {
       color: white; }
       .app nav h2 small {
         color: white; }
+  .app .app-heading a {
+    color: white; }
+    .app .app-heading a:hover {
+      color: #fefefe; }
   .app .nav-admin {
     background-color: #d9534f !important; }
   .app .content {
@@ -6220,6 +6226,3 @@ footer {
     .app .content .cancel-exam {
       margin: 0;
       padding: 0; }
-
-.CodeMirror {
-  height: 200px; }

@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 use App\Subject;
 
+use App\Exam;
+
+use Carbon;
+
 class HomeController extends Controller
 {
     /**
@@ -42,11 +46,18 @@ class HomeController extends Controller
         $userSubjects = Subject::whereIn('id', $user->subjects())->get();
         
         $showSubject = $userSubjects[0];
+        
+        $exams = Exam::whereUserId($user->id)->paginate(5);
           
+        $englishExamDate = new Carbon\Carbon('26 October 2016');
+        
+        $firstExamDate = Carbon\Carbon::now()->diffInDays($englishExamDate);
+        
         return view('dashboard')->with('appHeading', "Welcome back, {$user->name}")
-                                ->with('appSubheading', "You haven't practised yet")
+                                ->with('appSubheading', "Exams start in {$firstExamDate} days!")
                                 ->with('user', $user)
                                 ->with('userSubjects', $userSubjects)
-                                ->with('showSubject', $showSubject);
+                                ->with('showSubject', $showSubject)
+                                ->with(compact('exams'));
     }
 }

@@ -33,4 +33,8 @@ class User extends Authenticatable
         return explode(", ", $this->subjects);
         // explode maybe 'subjects'
     }
+    
+    public function exams() {
+        return $this->hasMany('App\Exam');
+    }
 }

@@ -20,10 +20,19 @@ Route::get('/', 'HomeController@index')->middleware('guest');
 // Create controller for exams
 Route::resource('exam', 'ExamController');
 
+Route::group(['prefix' => 'exam/{exam}'], function () { // TODO: middleware admin
+    Route::get('results', 'ExamController@results')->name('exam.results');
+        
+    Route::group(['prefix' => 'question'], function () {
+        Route::get('{question}', 'ExamController@showQuestion')->name('exam.question.show');
+        Route::post('{question}', 'ExamController@progressQuestion')->name('exam.question.progress');
+    });
+});
+
 // Authenticated user routes
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/dashboard', 'HomeController@dashboard')->middleware('forceSubject');
+    Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard')->middleware('forceSubject');
 
 	Route::get('/subject/select', 'UserSubjectController@index')->name('usersubject.index');
 	Route::post('/subject/select', 'UserSubjectController@store')->name('usersubject.store');

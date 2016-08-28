@@ -36,7 +36,7 @@
       
       <div class="row">
         <div class="col-md-12 text-center">
-          <h2><strong><a href="{{ route('admin.index') }}">Admin Panel</a></strong></h2>
+          <h2 class="app-heading"><strong><a href="{{ route('admin.index') }}">Admin Panel</a></strong></h2>
           @if (isset($appSubheading))
             <h2><small>{{ $appSubheading }}</small></h2>
           @endif

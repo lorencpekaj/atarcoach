@@ -14,7 +14,7 @@
     
     <div class="row">
       <div class="col-md-12 text-center">
-        <h2><strong>{{ $appHeading or "" }}</strong></h2>
+        <h2 class="app-heading"><strong>{{ $appHeading or "" }}</strong></h2>
         <h2><small>{{ $appSubheading or "" }}</small></h2>
       </div>
     </div>

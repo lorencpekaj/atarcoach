@@ -38,12 +38,13 @@
                 </div>
 
                 <div class="text-center" style="background: red">
-                  <a href="{{ url('/password/reset') }}">
-                    <small>Forgot Password?</small>
-                  </a> &bullet;
-                  <a href="{{ url('/register') }}">
-                    <small>Create a new account?</small>
-                  </a>
+                </div>
+                <div class="form-group text-center">
+                  <small class="form-label">
+                    <a href="{{ url('/') }}">Home</a> &bullet;
+                    <!--<a href="{{ url('/password/reset') }}">Forgot password?</a> &bullet;-->
+                    <a href="{{ url('/register') }}">Sign up</a>  
+                  </small>
                 </div>
               {!! Form::close() !!}
 

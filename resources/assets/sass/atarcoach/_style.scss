@@ -101,10 +101,15 @@ header {
         padding: 45px 0;
         @include nav-text(13px);
         
-        color:white;
-       
-     
-       
+        a {
+            color:white;
+            
+            &:hover {
+                color: #eee;
+            text-decoration: none;
+            }
+        }
+        
         .nav-item {
            @include nav-bar;
         }
@@ -122,14 +127,6 @@ header {
         
        .brand { 
             @include nav-text(32px);
-       }
-       
-       .nav-btn {
-           padding:10px 20px;
-           background: $blue;
-           color:white;
-           @include br(2px);
-           border-bottom:none!important;
        }
        
     }

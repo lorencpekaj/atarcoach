@@ -11,5 +11,10 @@ class QuestionSet extends Model
 	public function questions() {
 	    return $this->hasMany('App\Question', 'question_set_id');
 	}
+	
+	public function information() {
+		// TODO: markdown parser
+		return $this->information;
+	}
     
 }
