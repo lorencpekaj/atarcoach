@@ -4,11 +4,11 @@
     
     <div class="row">
       <div class="col-md-3">
-        <div class="atar-logo"></div>
+        <a href="{{ url('/') }}"><div class="atar-logo"></div></a>
       </div>
       
       <div class="col-md-9">
-        <!-- TODO -->
+        @include ('partials/app/menu')
       </div>
     </div>
     

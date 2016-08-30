@@ -66,11 +66,10 @@ class ExamController extends Controller
     {
         $validator = Validator::make($request->all(), static::$examStoreRules);
 
-        // TODO: Error handling
         if ($validator->fails()) {
- 			Alert::error("Error", "Couldn't create exam")->persistent('Close');
- 			return var_dump($validator->errors());
-            return redirect()->route('admin.chapter.create')->withErrors($validator)->withInput();
+            $errorMessage = implode(' ', call_user_func_array('array_merge', $validator->errors()->toArray()));
+ 			Alert::error($errorMessage, "Couldn't create exam")->persistent('Close');
+            return redirect()->back()->withInput();
         }
         
         $exam = new Exam;
@@ -93,7 +92,9 @@ class ExamController extends Controller
         // Randomize question sets
         $questionSets = $questionSets->shuffle();
         
-        // Order all question sets by the number of questions they have (highest to lowest)
+        // Quick sort all question sets by the number of questions they have (highest to lowest)
+        // The exam generation process must happen as efficiently as possible.
+        // We are choosing quick sort as it is the most time efficient.
         $questionSets = $questionSets->sortBy('questions_count')->values();
         
         // Amount total questions to this variable    
@@ -215,6 +216,13 @@ class ExamController extends Controller
         
         // Count correct questions
         $questionsCount = $questionChoices->count();
+        
+        // Check if the question even exists...
+        if ( ! $questionsCount) {
+ 			Alert::error("This exam couldn't be shown due to erroneous questions.", "Exam Error")->persistent('Close');
+            return redirect('/dashboard');
+        }
+        
         $correctQuestionsCount = 0;
         
         foreach ($questionChoices as $choice) {
@@ -245,15 +253,21 @@ class ExamController extends Controller
         // Get selected values
         $selectedChoices = $request->choice;
         
-        $questionChoices = QuestionChoice::whereIn('id', $selectedChoices)->get();
+        // Get valid question ids
+        $validQuestions = $questionSet->questions->lists('id');
+        
+        $questionChoices = QuestionChoice::whereIn('id', $selectedChoices)->whereIn('question_id', $validQuestions)->get();
         
         if (is_null($questionChoices)) {
-            return "No question choices found!";
+ 			Alert::error("This exam couldn't be shown due to erroneous question choices.", "Exam Error")->persistent('Close');
+            return redirect('/dashboard');
         }
         
-        // TODO: validate if question choice is valid question set
-        
-        // TODO: validate question choice
+        // validate if question choice is valid question set
+        if (count($request->choice) != $questionSet->questions->count()) {
+ 			Alert::error("Please complete the question set", "Cannot Continue")->persistent('Close');
+            return redirect()->back();
+        }
         
         // Create an empty question set array to store the choices
         $completedQuestionSet = json_decode($exam->question_sets_completed, true);
@@ -269,29 +283,6 @@ class ExamController extends Controller
         
         // Redirect to exam index, it will skip to next question.
         return redirect()->route('exam.show', $exam->id);
-    }
-    
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**
@@ -314,6 +305,6 @@ class ExamController extends Controller
         $exam->delete();
         
  		Alert::success("You have deleted an exam!", "Exam destroyed");
-        return redirect('/');
+        return redirect('/dashboard');
     }
 }

@@ -20,7 +20,8 @@ class ApiChapterController extends Controller
 {
     public function show($id) {
         
-        $chapters = Chapter::whereSubjectId($id)->get();
+        // Displaying all chapters one by one and sorting them by descending order
+        $chapters = Chapter::whereSubjectId($id)->orderBy('sort', 'desc')->get();
         
         return response()->json($chapters);
     }

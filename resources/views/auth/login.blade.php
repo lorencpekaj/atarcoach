@@ -15,8 +15,7 @@
             <div class="col-md-offset-4 col-md-4 col-sm-offset-2 col-sm-8">
 
               {!! Form::open(['url' => '/login', 'method' => 'POST', 'class' => 'form-horizontal']) !!}
-                {!! csrf_field() !!}
-
+              
                 <!-- EMAIL -->
                 <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                   {!! Form::email('email', '', ['class' => 'form-control', 'placeholder' => 'Email Address']) !!}
@@ -37,12 +36,10 @@
                   {!! Form::submit('Login', ['class' => 'btn btn-atar btn-block']) !!}
                 </div>
 
-                <div class="text-center" style="background: red">
-                </div>
                 <div class="form-group text-center">
                   <small class="form-label">
                     <a href="{{ url('/') }}">Home</a> &bullet;
-                    <!--<a href="{{ url('/password/reset') }}">Forgot password?</a> &bullet;-->
+                    <a href="{{ url('/password/reset') }}">Forgot password</a> &bullet;
                     <a href="{{ url('/register') }}">Sign up</a>  
                   </small>
                 </div>

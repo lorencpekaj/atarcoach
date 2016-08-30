@@ -64,7 +64,15 @@
         <div class="form-group">
           {!! Form::label('question_set', 'Question set', ['class' => 'col-xs-3 control-label', 'id' => 'question_set']) !!}
           <div class="col-xs-9">
-            {!! Form::text('question_set', null, ['class' => 'form-control', 'placeholder' => 'Ignore if this question is unique', 'id' => 'question_set']) !!}
+            {!! Form::text('question_set', null, ['class' => 'form-control', 'placeholder' => 'Ignore if this question is unique', 'id' => 'question_set', 'v-on:change' => 'changeQuestionSet', 'v-model' => 'selectedQuestionSet']) !!}
+          </div>
+        </div>
+        
+        <!-- Textarea -->
+        <div class="form-group" id="question-set" hidden>
+          {!! Form::label('set_information', 'Question', ['class' => 'col-xs-3 control-label', 'id' => 'chapter']) !!}
+          <div class="col-xs-9">
+            {!! Form::textarea('set_information', null, ['placeholder' => 'Write your question here', 'style' => 'height: 300px', 'v-model' => 'questionSet', 'v-on:change' => 'updateQuestionSet']) !!}
           </div>
         </div>
         
@@ -87,12 +95,10 @@
 <script type="text/javascript">
 new Vue({
   
-  ready() {
-
-  },
-  
   el: '#app',
   data: {
+    questionSet: null,
+    selectedQuestionSet: null,
     selectedChapter: null,
     subjects: []
   },
@@ -117,6 +123,32 @@ new Vue({
         alert("Could not load chapters. Please reload page.");
       });
       
+    },
+    
+    changeQuestionSet: function (event) {
+      
+      this.$http.get('/api/question_set/' + this.selectedQuestionSet).then((response) => {
+        
+        var questionSetData = response.json();
+        
+        // Check if value question set was found
+        if (Object.keys(questionSetData).length === 0) {
+          $('#question-set').hide();
+          alert('Unable to identify question set.');
+        } else {
+          $('#question-set').show();
+          this.$set('questionSet', questionSetData.information);
+        }
+        
+      });
+      
+    },
+    
+    updateQuestionSet: function (event) { 
+      // Whenever the textarea is changed, save the question set
+      this.$http.get('/api/question_set/' + this.selectedQuestionSet + '/update?information=' + this.questionSet).then((response) => {
+        alert('Question set has been saved!');
+      });
     }
   }
 })

@@ -12,7 +12,7 @@ class Question extends Model
 	
 	// Return question sets through a relationship
 	public function questionsets() {
-	    return $this->belongsTo('App\QuestionSet');
+	    return $this->belongsTo('App\QuestionSet', 'question_set_id', 'id');
 	}
 	
 	// Return choices through a relationship

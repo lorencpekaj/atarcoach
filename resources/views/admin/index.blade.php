@@ -15,7 +15,7 @@
       <h3 class="buffer-top">Questions</h3>
       
       <div class="list-group">
-        <a href="{{ route('admin.chapter.create') }}" class="list-group-item">View questions</a>
+        <a href="{{ route('admin.question.index') }}" class="list-group-item">View questions</a>
         <a href="{{ route('admin.question.create') }}" class="list-group-item">Create a question</a>
       </div>
       

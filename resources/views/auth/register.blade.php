@@ -49,12 +49,12 @@
 
                 <div class="form-group">
                   {!! Form::submit('Sign up', ['class' => 'btn btn-atar btn-block']) !!}
-                </p>
+                </div>
                 
                 <div class="form-group text-center">
                   <small class="form-label">
                     <a href="{{ url('/') }}">Home</a> &bullet;
-                    <!--<a href="{{ url('/password/reset') }}">Forgot password?</a> &bullet;-->
+                    <a href="{{ url('/password/reset') }}">Forgot password</a> &bullet;
                     <a href="{{ url('/login') }}">Log in</a>  
                   </small>
                 </div>

@@ -7,14 +7,13 @@
     @if (is_null($questionSet->information) == false)
       <div class="text-center">
         <p><h3>{!! $questionSet->information() !!}</h3></p>
-        <p><strong>This information belongs to a similar question.</strong></p>
         <hr>
       </div>
     @endif
     
     @foreach ($questions as $questionIndex => $question)
-      <fieldset>
-        <div class="text-center">
+      <fieldset class="buffer-down">
+        <div class="buffer-down text-center">
           <p><h4>{!! $question->information() !!}</h4></p>
         </div>
         

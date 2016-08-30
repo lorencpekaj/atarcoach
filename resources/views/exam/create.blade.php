@@ -45,6 +45,7 @@
           {!! Form::label('questions', 'Questions', ['class' => 'col-sm-3 control-label']) !!}
           <div class="col-sm-9">
             {!! Form::number('questions', 10, ['class' => 'form-control', 'min' => '1']) !!}
+            <p class="text-muted"><small>There may be more or less questions to the amount specified</small></p>
           </div>
         </div>
         

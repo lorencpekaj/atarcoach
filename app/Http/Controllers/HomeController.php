@@ -41,23 +41,22 @@ class HomeController extends Controller
      */
     public function dashboard()
     {
+        // Get user object
         $user = \Auth::user();
 
-        $userSubjects = Subject::whereIn('id', $user->subjects())->get();
-        
-        $showSubject = $userSubjects[0];
-        
-        $exams = Exam::whereUserId($user->id)->paginate(5);
-          
+        // Get all user exams and paginate 10 of them
+        $exams = Exam::whereUserId($user->id)->orderBy('created_at', 'desc')->paginate(10);
+    
+        // Create the english timestamp into a variable 
         $englishExamDate = new Carbon\Carbon('26 October 2016');
         
+        // Find days between english exam day and now
         $firstExamDate = Carbon\Carbon::now()->diffInDays($englishExamDate);
         
+        // Render view
         return view('dashboard')->with('appHeading', "Welcome back, {$user->name}")
                                 ->with('appSubheading', "Exams start in {$firstExamDate} days!")
                                 ->with('user', $user)
-                                ->with('userSubjects', $userSubjects)
-                                ->with('showSubject', $showSubject)
                                 ->with(compact('exams'));
     }
 }

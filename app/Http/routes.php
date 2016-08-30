@@ -17,20 +17,21 @@ Route::auth();
 // Creates the index route (GET)
 Route::get('/', 'HomeController@index')->middleware('guest');
 
-// Create controller for exams
-Route::resource('exam', 'ExamController');
-
-Route::group(['prefix' => 'exam/{exam}'], function () { // TODO: middleware admin
-    Route::get('results', 'ExamController@results')->name('exam.results');
-        
-    Route::group(['prefix' => 'question'], function () {
-        Route::get('{question}', 'ExamController@showQuestion')->name('exam.question.show');
-        Route::post('{question}', 'ExamController@progressQuestion')->name('exam.question.progress');
-    });
-});
-
 // Authenticated user routes
 Route::group(['middleware' => 'auth'], function () {
+    
+    // Create controller for exams
+    Route::resource('exam', 'ExamController', ['except' => ['edit', 'update']]);
+
+    // Create 
+    Route::group(['prefix' => 'exam/{exam}'], function () {
+        Route::get('results', 'ExamController@results')->name('exam.results');
+            
+        Route::group(['prefix' => 'question'], function () {
+            Route::get('{question}', 'ExamController@showQuestion')->name('exam.question.show');
+            Route::post('{question}', 'ExamController@progressQuestion')->name('exam.question.progress');
+        });
+    });
 
     Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard')->middleware('forceSubject');
 
@@ -40,17 +41,16 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 // Admin
-Route::group(['prefix' => 'admin'], function () { // TODO: middleware admin
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     
     // Create controller for admin index
     Route::get('/', 'Admin\AdminController@index')->name('admin.index');
     
     // Create controller for chapters
-    Route::resource('chapter', 'Admin\ChapterController');
+    Route::resource('chapter', 'Admin\ChapterController', ['except' => ['show', 'edit', 'update']]);
     
     // Create controller for questions
-    Route::resource('question', 'Admin\QuestionController');
-    
+    Route::resource('question', 'Admin\QuestionController', ['except' => ['show', 'edit', 'update']]);
     
 });
 
@@ -58,8 +58,13 @@ Route::group(['prefix' => 'admin'], function () { // TODO: middleware admin
 Route::group(['prefix' => 'api', 'middleware' => 'api'], function () {
     Route::group(['middleware' => 'api:auth'], function () {
 
-		Route::get('/subjects', 'SubjectController@index'); // unused
-		Route::get('/chapters/{id}', 'Api\ApiChapterController@show'); // unused
+        // Create subject
+		Route::get('/subjects', 'SubjectController@index');
+		Route::get('/chapters/{id}', 'Api\ApiChapterController@show');
+		
+		// Modify question set information
+	    Route::get('/question_set/{id}', 'Api\ApiQuestionController@show');
+		Route::get('/question_set/{id}/update', 'Api\ApiQuestionController@update');
 
     });
 });

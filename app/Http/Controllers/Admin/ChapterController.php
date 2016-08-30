@@ -33,7 +33,7 @@ class ChapterController extends Controller
      */
     public function index()
     {
-        $subjects = Subject::lists('subject', 'id');
+        $subjects = Subject::has('chapters')->paginate(10);
 
         return view('admin.chapter.index')->with('appSubheading', 'Access chapters among subjects')
                                           ->with('subjects', $subjects);
@@ -66,11 +66,10 @@ class ChapterController extends Controller
     {
         $validator = Validator::make($request->all(), static::$chapterStoreRules);
 
-        // TODO: Error handling
         if ($validator->fails()) {
- 			Alert::error("Error", "Couldn't create chapter")->persistent('Close');
- 			return var_dump($validator->errors());
-            // return redirect()->route('admin.chapter.create')->withErrors($validator)->withInput();
+            $errorMessage = implode(' ', call_user_func_array('array_merge', $validator->errors()->toArray()));
+ 			Alert::error($errorMessage, "Couldn't create chapter")->persistent('Close');
+            return redirect()->back()->withInput();
         }
 
         try
@@ -91,40 +90,6 @@ class ChapterController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -132,6 +97,10 @@ class ChapterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $chapter = Chapter::findOrFail($id);
+        $chapter->delete();
+        
+ 		Alert::success("You have deleted a chapter!", "Chapter destroyed");
+        return redirect()->route('admin.chapter.index');
     }
 }

@@ -1,11 +1,8 @@
-* create multiple choice answers per question
-* create exam feature
-    - resume exam
-    - exit exam
-    - maybe ajax based.
-* progress through exams
-* edit question/chapters
+* admin permissions (medium)
+* validate exam progress (easy)
+* error handling
+* questions
 
--- to learn
-- vuejs props
-- model
+X admin middleware
+X pw reset
+X delete chpt/ques
