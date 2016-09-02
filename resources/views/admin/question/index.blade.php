@@ -41,6 +41,7 @@
         </tbody> 
       </table>
     
+      <div class="text-center">{{ $questions->links() }}</div>
 
     </div>
   </div>

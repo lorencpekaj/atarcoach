@@ -29,6 +29,8 @@
       
       @endforeach
     
+      <div class="text-center">{{ $subjects->links() }}</div>
+    
 
     </div>
   </div>

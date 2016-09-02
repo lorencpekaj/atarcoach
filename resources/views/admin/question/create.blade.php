@@ -41,6 +41,7 @@
           {!! Form::label('information', 'Question', ['class' => 'col-xs-3 control-label', 'id' => 'chapter']) !!}
           <div class="col-xs-9">
             {!! Form::textarea('information', null, ['placeholder' => 'Write your question here', 'style' => 'height: 300px']) !!}
+            <p class="text-muted">Write your latex code within ~ tags!</p>
           </div>
         </div>
         
