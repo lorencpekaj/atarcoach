@@ -74,7 +74,7 @@ class QuestionController extends Controller
         if ($validator->fails()) {
             $errorMessage = implode(' ', call_user_func_array('array_merge', $validator->errors()->toArray()));
  			Alert::error($errorMessage, "Couldn't create question")->persistent('Close');
-            return redirect()->back()->withInput();
+            return redirect()->back()->withInput($request->except('choice'));
         }
 
         try
@@ -120,8 +120,9 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        $chapter = Question::findOrFail($id);
-        $chapter->delete();
+        $question = Question::findOrFail($id);
+        $question->questionsets->delete();
+        $question->delete();
         
  		Alert::success("You have deleted a question!", "Question destroyed");
         return redirect()->route('admin.question.index');
