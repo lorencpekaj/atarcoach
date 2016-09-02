@@ -84,8 +84,9 @@ class ExamController extends Controller
                                     
                                     ->get();
                                     
+                                    
         if ($questionSets->isEmpty()) {
- 			Alert::error("Please try again later.", "No available questions!")->persistent('Close');
+ 			Alert::error("Sorry, please try again later!", "No available questions!")->persistent('Close');
             return redirect()->route('exam.create')->withInput();
         }
         
@@ -161,6 +162,15 @@ class ExamController extends Controller
         $exam = Exam::findOrFail($exam);
 
         $questionSet = QuestionSet::findOrFail($question);
+        
+        if ( ! $exam->totalQuestions()) {
+            // destroy the invalid exam
+            $exam->delete();
+            
+            // redirect and alert
+ 			Alert::error("That exam had errorneous questions and therefore was removed.", "Errorneous Exam")->persistent('Close');
+            return redirect()->route('exam.create')->withInput();
+        }
         
         $questionsComplete = number_format($exam->totalQuestions(true) / $exam->totalQuestions() * 100, 0);
 

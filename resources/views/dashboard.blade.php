@@ -32,7 +32,7 @@
           </div>
         @else
           <div class="col-sm-4 text-center">
-            <h4 class="complete-progress">{{ number_format($exam->totalQuestions(true) / $exam->totalQuestions() * 100, 0) }}%</h4>
+            <h4 class="complete-progress">{{ $exam->totalQuestions() ? number_format($exam->totalQuestions(true) / $exam->totalQuestions() * 100, 0) : 0 }}%</h4>
             <small>PROGRESSING</small>
           </div>
           

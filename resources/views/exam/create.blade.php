@@ -98,9 +98,9 @@ new Vue({
       
     },
     modifyTitle: function (event) {
-      subjectName = $("#subject option[value='" + this.selectedSubject + "']").text().trim();
+      // subjectName = $("#subject option[value='" + this.selectedSubject + "']").text().trim(); // gets subject name
       chapterName = $("#chapterId option[value='" + this.selectedChapter + "']").text().trim();
-      $('#title').val(subjectName + " " + chapterName + ' Exam');
+      $('#title').val(chapterName + ' Exam');
     }
   }
 })
