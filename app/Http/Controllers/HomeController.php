@@ -31,7 +31,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        // Get group of subjects
+        $subjects = Subject::whereHas('chapters', function ($query) {
+            $query->has('questionsets');
+        })->get();
+        
+        // Render welcome page with subjects
+        return view('welcome')->with(compact('subjects'));
     }
     
     /**

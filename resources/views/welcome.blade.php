@@ -54,18 +54,18 @@
       <div class="row text-center buffer-down">
         <div class="col-xs-12 col-sm-4">
           <i class="ac-icon large science"></i>
-          <h3>Feedback on your results</h3>
-          <p class="text-muted">Get personalised feedback on your quiz results, using our SmartResults system</p>
+          <h3>Review your results</h3>
+          <p class="text-muted">See what you're getting wrong with particular chapters and work to address them.</p>
         </div>
         <div class="col-xs-12 col-sm-4">
           <i class="ac-icon large science"></i>
           <h3>Do better on your exams</h3>
-          <p class="text-muted">Get personalised feedback on your quiz results, using our SmartResults system</p>
+          <p class="text-muted">Practice equations from random VCAA examinations and prepare yourself for all questions.</p>
         </div>
         <div class="col-xs-12 col-sm-4">
           <i class="ac-icon large science"></i>
           <h3>Progressive learning</h3>
-          <p class="text-muted">Get personalised feedback on your quiz results, using our SmartResults system</p>
+          <p class="text-muted">Target specific chapters among your subjects and identify weaknesses early and easily.</p>
         </div>
       </div>
 
@@ -87,9 +87,9 @@
                         <h3 class="timeline-title">Sign up for free</h3>
                       </div>
                       <div class="timeline-body">
-                        <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. </p>
+                        <p>ATARCoach has always been a free service for students that has been developed by students to enhance their learning.</p>
 
-                        <div class="timeline-btn"><a href="#" class="btn btn-warning text-center">Sign up here</a></div>
+                        <!--<div class="timeline-btn"><a href="/register" class="btn btn-warning text-center" style="z-index:99999;display:block;width:108px;height:32px;">Sign up here</a></div>-->
                       </div>
                     </div>
                   </li>
@@ -98,10 +98,10 @@
                     <div class="timeline-panel">
                       <div class="timeline-heading">
                         <i class="ac-icon school"></i>
-                        <h3 class="timeline-title">Access your questions</h3>
+                        <h3 class="timeline-title">Review your subjects</h3>
                       </div>
                       <div class="timeline-body">
-                        <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis.</p>
+                        <p>Practice exams from different subjects and identify your strengths and weaknesses of each chapter easily.</p>
                       </div>
                     </div>
                   </li>
@@ -113,7 +113,7 @@
                         <h3 class="timeline-title">Practice makes perfect</h3>
                       </div>
                       <div class="timeline-body">
-                        <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. </p>
+                        <p>Practice an unlimited number of times and continously make improvements with subjects that require attention effectively.</p>
                       </div>
                     </div>
                   </li>
@@ -125,7 +125,7 @@
                         <h3 class="timeline-title">Take your exam</h3>
                       </div>
                       <div class="timeline-body">
-                        <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. </p>
+                        <p>Choose the number of questions you want to do and complete an exam in the most fashionable and easiest way possible.</p>
                       </div>
                     </div>
                   </li>
@@ -138,7 +138,7 @@
       <div class="row buffer-up">
         <div class="col-xs-12 text-center">
           <h3>Never get nervous before your exam again</h3><br>
-          <a href="#" class="btn btn-lg btn-primary">Get started</a>
+          <a href="/register" class="btn btn-lg btn-primary">Get started</a>
         </div>
       </div>
 
@@ -155,9 +155,11 @@
           <h2>What's available?</h2>
 
           <div class="row subject-list h3">
-            <div class="col-sm-4">Further Mathematics</div>
-            <div class="col-sm-4">Specialist Mathematics</div>
-            <div class="col-sm-4">Physics</div>
+            @forelse ($subjects as $subject)
+            <div class="col-sm-6">{{ $subject->subject }}</div>
+            @empty
+            <div class="col-sm-12">Nothing to show :(</div>
+            @endforelse
           </div>
 
         </div>
