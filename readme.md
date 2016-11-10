@@ -1,27 +1,48 @@
-# Laravel PHP Framework
+# AtarCoach
+### An application that allows students to revise for exams
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+This year, I was a VCE student undertaking Units 3 and 4 of Software Development. It was fun. This was my school-asssessed taskwork (SAT) for my Software Development subject.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+The exam is over today, and to remember this day, I am opensorucing this project that took time and effort. The overall outcome was compelling.
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+Had great fun doing this! Shout out to simon :D
 
-## Official Documentation
+## Developing environment
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+Laravel 5.3 with Vuejs.
 
-## Contributing
+## Installation
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+To install... Do the typical things.
 
-## Security Vulnerabilities
+```php
+php artisan install
+php artisan upgrade
+php artisan migrate
+php artisan seed --class=SubjectsTableSeeder 
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+To make yourself an admin, use SQL.
+```sql
+update users set is_admin=1 where name='{your name}' -- double check the users migration if this doesn't work
+```
 
-## License
+# Here's some previews
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+## Landing
+![land](https://i.gyazo.com/77f5c91c5e278a70f7fa9ffed53aed72.gif)
+
+## Subject selection
+![subj](https://i.gyazo.com/fd06e78ca8281c8578261cc740f5a3a0.png)
+
+## Create an exam
+![create exam](https://i.gyazo.com/b722631640d11707e78658f7e1f80674.png)
+
+## Progressing through an exam
+![progress](https://i.gyazo.com/b5f3cec20e04d2d72ba72508c0e28fb8.png)
+
+## Result of an exam
+![results](https://i.gyazo.com/d6b82bbe5d2571e11fb6c301da33e744.png)
+
+## Admin Panel
+![panel](https://i.gyazo.com/036a0d69194b0c58896dd4154602c404.png)
